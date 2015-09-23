@@ -1,0 +1,6 @@
+%div.record{ :id => "record-#{record.id}" }   
+  .row
+    .col-xs-12.col-md-12
+      %hr
+      ="#{record.created} #{record.item.title} #{record.value}分钟。#{record.description}"
+      = link_to "×", record_path(record), :method => :delete, :remote => true, :confirm => "Are you sure you want to remove this record?", :disable_with => "×", :class => 'close'

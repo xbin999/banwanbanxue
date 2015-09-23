@@ -1,0 +1,10 @@
+%h1= current_user.email + " 分类" 
+
+%h2= link_to "新增", new_user_itemship_path
+
+- @user_items.each do |item|
+  .row
+    .col-md-1
+      %p.item= item.title
+    .col-md-1
+      = link_to "Delete", user_itemship_path(item), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default"

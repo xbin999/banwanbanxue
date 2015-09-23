@@ -1,0 +1,52 @@
+!!! 5
+%html
+  %head
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}/
+    %title Banwanbanxue
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-default.navbar-fixed-top
+      .container
+        //.navbar-brand= link_to "半玩伴学", root_path
+        %ul.nav.navbar-nav.pull-left
+          %li= link_to "首页", root_path
+          %li= link_to "新增", new_record_path
+          %li.dropdown
+            %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+              = "统计"
+              %span.caret
+            %ul.dropdown-menu
+              %li= link_to "按项目", "#"
+              %li= link_to "按日期", "#"
+
+        - if user_signed_in?
+          %ul.nav.navbar-nav.pull-right
+            %li.dropdown
+              %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                = current_user.email.split("@").first
+                %span.caret
+              %ul.dropdown-menu
+                %li= link_to "账户", edit_user_registration_path
+                %li.divider{:role => "separator"}
+                %li= link_to "退出", destroy_user_session_path, method: :delete
+        -else
+          %ul.nav.navbar-nav.pull-right
+            %li.dropdown
+              %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                账户
+                %span.caret
+              %ul.dropdown-menu
+                %li= link_to "注册", new_user_registration_path
+                %li= link_to "登录", new_user_session_path
+
+    .container
+      - flash.each do |name, msg|
+        = content_tag :div, msg, class: "alert alsert-info"
+      = yield
+      %br
+
+    %footer.footer
+      .container
+        %p.text-muted Powered by 半玩伴学      

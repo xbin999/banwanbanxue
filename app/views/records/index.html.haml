@@ -1,0 +1,48 @@
+//= javascript_include_tag "//www.google.com/jsapi", "chartkick"
+
+.row.text-center
+  .col-xs-12.col-md-12
+    %blockquote
+      %p 把时间浪费在美好的事物上
+
+.row
+  .col-xs-12.col-md-12.text-center
+    - if @map.sum > 100 * 60 
+      %h1= "#{@map.sum / 60}"
+      %h5 总小时
+    - else
+      %h1= "#{@map.sum}"
+      %h5 总分钟
+
+- @user_items.each do |item|
+  .row.text-center
+    .col-xs-6.col-md-6
+      %p.item= item.title 
+    .col-xs-6.col-md-6 
+      %p.item= "#{@map.sum_by_item(item.title)} 分钟"
+
+.row
+  .col-xs-12.col-md-12
+    = pie_chart @map.hash_item_title_value
+
+.row
+  .col-xs-12.col-md-12.text-center
+    %button.btn.btn-default.btn-lg= link_to "开始浪费", new_record_path
+
+-# haml注释方式，缩进下面的内容，整块注释
+-#
+  .row
+    .col-xs-3.col-md-2
+      %p.item 日期
+    - @user_items.each do |item|
+      .col-xs-2.col-md-1
+        %p.item= item.title
+
+-#
+  - @map.hash_day_item.each do |d, value|
+    .row
+      .col-xs-3.col-md-2
+        %p.item= d
+      - @user_items.each do |item|
+        .col-xs-2.col-md-1
+          %p.item= value[item.id] || 0

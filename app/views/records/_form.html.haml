@@ -1,0 +1,19 @@
+.record-form
+  = simple_form_for record, :remote => true, html: { class: 'form-horizontal', multipart: true}, wrapper: :horizontal_form do |f|
+    - if record.errors.any?
+      #errors
+        %h2
+        = pluralize(record.errors.count, "error")
+        prevented this new_record from saving
+        %ul
+          - record.errors.full_messages.each do |msg|
+            %li= msg
+
+    = f.input :created, as: :string, label: '日期', input_html: {type: :date, value: Date.today}
+    = f.association :item,  label: '项目', collection: user_items
+    = f.input :value, label: '耗时', placeholder: '分钟', input_html: {class:  'form-control'}
+    = f.input :description, label: '备注', input_html: {class:  'form-control'}
+    = f.input :user_id, :as => :hidden, :value => @current_user.id
+    .text-center
+      = f.button :submit, '保存', class: "btn btn-default btn-lg", :disable_with => "Submitting…"
+  %br
