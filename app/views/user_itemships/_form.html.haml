@@ -1,0 +1,16 @@
+%h1 选择项目
+%br
+
+= simple_form_for user_itemship, html: { multipart: true} do |f|
+  - if user_itemship.errors.any?
+    #errors
+      %h2
+      = pluralize(user_itemship.errors.count, "error")
+      prevented this user_itemship from saving
+      %ul
+        - user_itemship.errors.full_messages.each do |msg|
+          %li= msg
+  = f.association :item, collection: items
+
+  = f.button :submit, '保存', class: "btn btn-success btn-block btn-lg"  
+  = link_to "Cancel", :back, {:class=>"btn btn-default btn-block btn-lg"}

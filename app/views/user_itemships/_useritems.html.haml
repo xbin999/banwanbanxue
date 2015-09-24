@@ -1,0 +1,14 @@
+%h1= "我想浪费的事" 
+%br
+
+%table.table-striped
+  - user_items.each do |item|
+    %tr
+      %td{:style => "width:100%"}
+        %p.item= item.title
+      %td
+        = link_to user_itemship_path(item), method: :delete, data: { confirm: "你确定要删除吗？" }, class: "btn btn-default btn-xs" do
+          %i.glyphicon.glyphicon-remove
+
+%br
+= link_to "新增", new_user_itemship_path, class: "btn btn-success btn-block btn-lg"
