@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Item.create!([
+  {title: "跑步", description: nil},
+  {title: "阅读", description: nil},
+  {title: "电影", description: nil},
+  {title: "平板", description: nil},
+  {title: "开发", description: nil},
+  {title: "公众号", description: nil}
+])
