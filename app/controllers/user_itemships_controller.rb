@@ -3,7 +3,7 @@ class UserItemshipsController < ApplicationController
   before_action :find_user_item, only: [:show, :edit, :update, :destroy]
 
   def index
-    @user_items = current_user.items
+    @user_items = current_user.user_itemships
   end
 
   def show

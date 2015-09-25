@@ -2,12 +2,12 @@
 %br
 
 %table.table-striped{:style => "width:100%"}
-  - user_items.each do |item|
+  - user_items.each do |uitem|
     %tr
       %td
-        %p.item= item.title
+        %p.item= uitem.item.title
       %td
-        = link_to user_itemship_path(item), method: :delete, data: { confirm: "你确定要删除吗？" }, class: "btn btn-default btn-xs" do
+        = link_to user_itemship_path(uitem), method: :delete, data: { confirm: "你确定要删除吗？" }, class: "btn btn-default btn-xs" do
           %i.glyphicon.glyphicon-remove
 
 %br
