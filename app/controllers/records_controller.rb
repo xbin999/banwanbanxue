@@ -1,7 +1,7 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_user_items
-  before_action :find_user_records, only: [:index, :new]
+  before_action :find_user_records, only: [:index, :new, :stat]
 
   def index
     @map = DateUserItemshipMap.new(current_user, @user_items, @user_records)
@@ -33,6 +33,10 @@ class RecordsController < ApplicationController
     else 
       render :js => "alert('error deleting record');" 
     end
+  end
+
+  def stat
+    @map = DateUserItemshipMap.new(current_user, @user_items, @user_records)
   end
 
 private

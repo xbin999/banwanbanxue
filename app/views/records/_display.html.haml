@@ -24,21 +24,3 @@
 
 .row
   = link_to "开始浪费", new_record_path, class: "btn btn-success btn-block btn-lg"
-
--# haml注释方式，缩进下面的内容，整块注释
--#
-  .row
-    .col-xs-3.col-md-2
-      %p.item 日期
-    - @user_items.each do |item|
-      .col-xs-2.col-md-1
-        %p.item= item.title
-
--#
-  - map.hash_day_item.each do |d, value|
-    .row
-      .col-xs-3.col-md-2
-        %p.item= d
-      - @user_items.each do |item|
-        .col-xs-2.col-md-1
-          %p.item= value[item.id] || 0

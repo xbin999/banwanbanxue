@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   end
 
   resources :records do
+    collection do
+      get :stat
+    end
   end
 
   # You can have the root of your site routed with "root"

@@ -18,8 +18,8 @@
               = "统计"
               %span.caret
             %ul.dropdown-menu
-              %li= link_to "按项目", "#"
-              %li= link_to "按日期", "#"
+              %li= link_to "按项目", stat_records_path(stat_param: 'item')
+              %li= link_to "按日期", stat_records_path(stat_param: 'date')
 
         - if user_signed_in?
           %ul.nav.navbar-nav.pull-right
@@ -44,7 +44,7 @@
 
     .container
       - flash.each do |name, msg|
-        = content_tag :div, msg, class: "alert alsert-info"
+        = content_tag :div, msg, class: "alert alert-info"
       = yield
       %br
 
