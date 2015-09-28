@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'records#index'
 
+  get '/tool', to: 'uploads#index'
+  post '/upload', to: 'uploads#upload'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

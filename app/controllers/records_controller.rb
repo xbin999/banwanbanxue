@@ -1,7 +1,7 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_user_items
-  before_action :find_user_records, only: [:index, :new, :stat]
+  before_action :find_user_records, only: [:index, :stat]
 
   def index
     @map = DateUserItemshipMap.new(current_user, @user_items, @user_records)
@@ -11,6 +11,7 @@ class RecordsController < ApplicationController
   end
 
   def new
+    @user_records = Record.paginate(page: params[:page], per_page: 15).order('created DESC')
     @new_record = Record.new
   end
 

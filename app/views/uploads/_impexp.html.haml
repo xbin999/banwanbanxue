@@ -1,0 +1,13 @@
+%h1 工具
+
+.exp
+  %h2 导出
+  
+
+.imp
+  %h2 导入
+  %h5 导入历史数据，采用CSV格式，形如：“日期,项目,分钟数”。
+  = simple_form_for :record_file, :url => upload_path, :method => :post,:html => {:multipart => true}, wrapper: :horizontal_form do |f|
+
+    = f.input :csv, as: :file, label: 'CSV文件'
+    = f.submit '上传记录', class: "btn btn-success btn-block btn-lg" 

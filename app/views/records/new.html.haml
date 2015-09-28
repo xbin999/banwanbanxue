@@ -1,7 +1,8 @@
 .row
-  = render :partial => 'records/form', layout: 'layout', :locals => { :record => @new_record, :user_items => @user_items }
-
+  = render :partial => 'records/form', layout: 'layouts/layout', :locals => { :record => @new_record, :user_items => @user_items }
 #rec_area
   .row
     .col-xs-12.col-md-6
       = render :partial => 'records/record', :collection => @user_records, :as => :record
+#static-pagination
+  = will_paginate @user_records
