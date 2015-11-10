@@ -23,4 +23,4 @@ jQuery ->
     .on "ajax:success", ".record", -> 
       $(this).hide('fast') 
     .on "ajax:error", ".record", -> 
-      $(this).fadeTo('fast', 1)      
+      $(this).fadeTo('fast', 1) 

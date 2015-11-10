@@ -23,5 +23,10 @@
   .row
     = pie_chart map.hash_item_title_value
 
+/
+  以下为注释
+  .row
+    = pie_chart Record.group(:item_id).sum(:value)
+
   .row
     = link_to "开始浪费", new_record_path, class: "btn btn-success btn-block btn-lg"

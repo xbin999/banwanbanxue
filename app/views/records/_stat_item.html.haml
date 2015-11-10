@@ -1,1 +1,23 @@
-%h1 按项目统计，还没空写
+.row
+  = column_chart @user_items.map{|item| {name: item.title, data: map.hash_item_day[item.id]}}, stacked: true
+
+- @user_items.each do |item|
+  %h2= "#{item.title} #{map.hash_item_day[item.id].count}次，#{map.sum_by_item(item.title)} 分钟"
+
+  .row
+    = line_chart map.hash_item_day[item.id]
+
+/
+  %table.table-striped{:style => "width:100%"}
+    %tr
+      %td
+        %p.item 日期
+      %td
+        %p.item 耗时
+
+    - map.hash_item_day[4].each do |d, value|
+      %tr
+        %td
+          %p.item= d
+        %td
+          %p.item= value || '-'

@@ -1,2 +1,9 @@
 .row
   = render :partial => 'form', layout: 'layouts/layout', :locals => { :user_itemship => @user_itemship, :items => @items }
+
+%br
+还没有想要的项目，
+= link_to "新增一个", new_item_path, {:remote => true, 'data-toggle' => "modal", 'data-target' => "#myModal"}
+
+#myModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", "tabindex" => -1, :role => "dialog"}
+%br

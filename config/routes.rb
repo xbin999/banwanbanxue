@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :user_itemships do
   end
 
+  resources :items, :only => [:new, :create]
+
   resources :records do
     collection do
       get :stat

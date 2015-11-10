@@ -1,0 +1,22 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      %h3#myModalLabel 新项目
+    .modal-body
+      #itemForm
+        = simple_form_for @item, :remote => true, html: { class: 'form-horizontal', multipart: true}, wrapper: :horizontal_form do |f|
+          - if @item.errors.any?
+            #errors
+              %h2
+              = pluralize(@item.errors.count, "error")
+              prevented this new_record from saving
+              %ul
+                - @item.errors.full_messages.each do |msg|
+                  %li= msg
+
+          = f.input :title, as: :string, label: '项目', input_html: {class:  'form-control'}
+          = f.input :description, label: '备注', input_html: {class:  'form-control'}
+          %br
+          %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} 取消
+          = f.button :submit, '保存', class: "btn btn-success", id: "saveItem", :disable_with => "Submitting…"
