@@ -14,8 +14,16 @@ class DateUserItemshipMap
     @hash_item_title_value = Hash.new { |h,k| h[k] = 0 } # item_title -> value, for graph
     @sum = 0
     @records.each do |record|
-      @hash_day_item[record.created][record.item_id] = record.value
-      @hash_item_day[record.item_id][record.created] = record.value
+      if @hash_day_item[record.created][record.item_id].nil?
+        @hash_day_item[record.created][record.item_id] = record.value
+      else
+        @hash_day_item[record.created][record.item_id] += record.value
+      end
+      if @hash_item_day[record.item_id][record.created].nil?
+        @hash_item_day[record.item_id][record.created] = record.value
+      else
+        @hash_item_day[record.item_id][record.created] += record.value
+      end
       @hash_day_value[record.created] += record.value
       @hash_item_title_value[record.item.title] += record.value
       @sum += record.value
