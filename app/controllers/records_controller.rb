@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 class RecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_user_items
@@ -13,7 +11,8 @@ class RecordsController < ApplicationController
   end
 
   def new
-    @user_records = Record.includes(:item).paginate(page: params[:page], per_page: 15).order('created_at DESC')
+    #@user_records = Record.includes(:item).paginate(page: params[:page], per_page: 15).order('created_at DESC')
+    @user_records = current_user.records.includes(:item).paginate(page: params[:page], per_page: 15).order(created: :desc)
     @new_record = Record.new
   end
 
@@ -22,7 +21,7 @@ class RecordsController < ApplicationController
 
     if @record.save
       render :partial => "records/record", :locals => { :record => @record }, :layout => false, :status => :created
-      flash[:notice] = "成功创建新记录"
+      # flash[:notice] = "成功创建新记录"
       # redirect_to records_path, notice: "Successfully created new record"
     else
       # render 'new'

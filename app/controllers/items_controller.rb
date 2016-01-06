@@ -7,7 +7,10 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
 
     if @item.save
-      redirect_to user_itemships_path, notice: "Successfully created new Item."
+      respond_to do |format|
+        format.js {}
+        format.html {redirect_to user_itemships_path, notice: "Successfully created new Item."}
+      end
     else
       render 'new'
     end

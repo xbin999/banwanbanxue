@@ -5,7 +5,7 @@
       %h3#myModalLabel 新项目
     .modal-body
       #itemForm
-        = simple_form_for @item, :remote => true, html: { class: 'form-horizontal', multipart: true}, wrapper: :horizontal_form do |f|
+        = simple_form_for @item, :remote => true, html: { class: 'form-horizontal', multipart: true, id:"new_item_form"}, wrapper: :horizontal_form do |f|
           - if @item.errors.any?
             #errors
               %h2
