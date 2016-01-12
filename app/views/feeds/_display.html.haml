@@ -1,0 +1,14 @@
+//= javascript_include_tag "//www.google.com/jsapi", "chartkick"
+
+.index
+  .row
+    %blockquote
+      %p 把时间浪费在美好的事物上
+
+  - records.each do |record|
+    .row
+      %hr
+      ="#{record.user.name}：在#{record.created}日，#{record.item.title}#{record.value}分钟。#{record.description}"
+      %span.pull-right
+        =" #{time_ago_in_words(record.created_at)}前  "
+

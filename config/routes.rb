@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   get '/tool', to: 'uploads#index'
   post '/upload', to: 'uploads#upload'
+  get '/feed', to: 'feeds#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
