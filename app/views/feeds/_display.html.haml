@@ -12,3 +12,5 @@
       %span.pull-right
         =" #{time_ago_in_words(record.created_at)}前  "
 
+  #static-pagination
+    = will_paginate records
