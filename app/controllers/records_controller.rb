@@ -21,7 +21,6 @@ class RecordsController < ApplicationController
 
     if @record.save
       render :partial => "records/record", :locals => { :record => @record }, :layout => false, :status => :created
-      # flash[:notice] = "成功创建新记录"
       # redirect_to records_path, notice: "Successfully created new record"
     else
       # render 'new'
