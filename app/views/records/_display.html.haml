@@ -18,7 +18,10 @@
       .col-xs-6.col-md-6
         %p.item= item.title 
       .col-xs-6.col-md-6 
-        %p.item= "#{map.sum_by_item(item.title)} 分钟"
+        - if map.sum_by_item(item.title) > 10 * 60 
+          %p.item= "#{map.sum_by_item(item.title) / 60} 小时"
+        - else
+          %p.item= "#{map.sum_by_item(item.title)} 分钟"
 
   .row
     = pie_chart map.hash_item_title_value
