@@ -12,7 +12,7 @@ class RecordsController < ApplicationController
 
   def new
     #@user_records = Record.includes(:item).paginate(page: params[:page], per_page: 15).order('created_at DESC')
-    @user_records = current_user.records.includes(:item).paginate(page: params[:page], per_page: 15).order(created: :desc)
+    @user_records = current_user.records.includes(:item).paginate(page: params[:page], per_page: 15).order(created: :desc,created_at: :desc)
     @new_record = Record.new
   end
 

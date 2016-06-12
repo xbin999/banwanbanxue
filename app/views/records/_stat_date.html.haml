@@ -5,11 +5,17 @@
     - @user_items.each do |item|
       %td
         %p.item= item.title
+    %td
+      %p.item 累计
 
   - map.hash_day_item.each do |d, value|
     %tr
       %td
         %p.item= d
+        - sum = 0
       - @user_items.each do |item|
+        - sum += value[item.id].to_i
         %td
           %p.item= value[item.id] || '-'
+      %td
+        %p.item= sum
