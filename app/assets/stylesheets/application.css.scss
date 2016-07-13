@@ -21,6 +21,11 @@ body {
   padding-top: 70px;
 }
 
+tr.wordline {
+  font-size:20px;
+  height:200px;
+}
+
 @media(max-width:979px) {
   .navbar-nav.pull-left > li { float: left; }
   .navbar-nav.pull-right > li { float: left; }

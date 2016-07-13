@@ -39,6 +39,10 @@ gem 'bootstrap-will_paginate'
 gem 'capistrano-rails', group: :development
 gem 'capistrano-passenger', group: :development
 
+gem 'nokogiri'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
