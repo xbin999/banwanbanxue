@@ -41,7 +41,8 @@ gem 'capistrano-passenger', group: :development
 
 gem 'nokogiri'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+#gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.3.0'
 
 group :development, :test do
   gem 'rspec'
