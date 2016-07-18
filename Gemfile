@@ -43,6 +43,7 @@ gem 'nokogiri'
 gem 'wicked_pdf'
 #gem 'wkhtmltopdf-binary'
 gem 'wkhtmltopdf-binary-edge', '~> 0.12.3.0'
+gem "bing_translator", "~> 4.5.0"
 
 group :development, :test do
   gem 'rspec'

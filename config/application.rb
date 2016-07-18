@@ -25,5 +25,7 @@ module Banwanbanxue
     config.active_record.raise_in_transactional_callbacks = true
     config.active_record.default_timezone = :utc
     config.time_zone = 'Beijing'
+
+    config.mysecrets = config_for(:mysecrets)
   end
 end
