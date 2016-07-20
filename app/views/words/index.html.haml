@@ -1,14 +1,2 @@
-%h1 卡片制作
-
-= simple_form_for :source, :url => translate_path(:format => :pdf), :method => :post do |f|
-  = f.input :name, label: '输入单词', hint: '以空格分隔', as: :text, input_html: {rows: 10, cols: 10}
-  %br
-  = f.button :submit, "生成"
-
-%br
-
-由 
-%a{:href => "http://fanyi.youdao.com/"}有道翻译 
-提供。
-
-%br
+.row
+  = render :partial => 'words/display', layout: 'layouts/layout', :locals => { :events => @events }

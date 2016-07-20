@@ -5,26 +5,46 @@ require 'bing_translator'
 
 class WordsController < ApplicationController
   def index
-    #logger.debug "http://fanyi.youdao.com/openapi.do?keyfrom=#{Rails.configuration.mysecrets['keyfrom']}&key=#{Rails.configuration.mysecrets['key']}&type=data&doctype=json&version=1.1&q=hello"
+    @events = Event.all.paginate(page: params[:page], per_page: 20).order(created_at: :desc)
+  end
+
+  def new
+    @event = Event.new
   end
 
   def translate
-    @source = params[:source][:name]
-    logger.debug "translate #{@source}..."
-    @target = Hash.new
-    @source.split(" ").each do |word|
-      @target[word] = convert(word)
-    end
-    #render :json => @target.to_json
-    #render 'translate'
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "words",
-               :template => 'words/translate.html.haml',
-               :layout => "pdf.html.haml"
+    @event = Event.new(event_params)
+    if @event.valid?
+      @event.save 
+
+      #@source = params[:source][:name]
+      @source = @event.words
+      logger.debug "translate #{@source}..."
+      @target = Hash.new
+      @source.split(" ").each do |word|
+        begin
+          @target[word] = convert(word)
+        rescue URI::InvalidURIError
+          logger.error "Error in translating #{word}, ingnore."
+          next
+        end
       end
+      #render :json => @target.to_json
+      #render 'translate'
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: "words",
+                 :template => 'words/translate.html.haml',
+                 :layout => "pdf.html.haml"
+        end
+      end
+    else
+      flash[:error] = @event.errors.full_messages.to_sentence
+      render "words/new.html.haml"
+      #redirect_to translate_path
     end
+
   end
 
 private
@@ -62,6 +82,10 @@ private
     end
 
     return target
+  end
+
+  def event_params
+    params.require(:event).permit(:name, :words, :age, :book)
   end
 
 end
