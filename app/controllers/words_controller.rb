@@ -72,9 +72,15 @@ private
   def convert(source)
     target ||= []
     # http://fanyi.youdao.com/openapi.do?keyfrom=XXXXXX&key=XXXXXXXX&type=data&doctype=json&version=1.1&q=hello
-    doc = JSON.parse(open("http://fanyi.youdao.com/openapi.do?keyfrom=#{Rails.configuration.mysecrets['keyfrom']}&key=#{Rails.configuration.mysecrets['key']}&type=data&doctype=json&version=1.1&q=#{source}").read)
+    logger.debug "http://fanyi.youdao.com/openapi.do?keyfrom=#{Rails.configuration.mysecrets['keyfrom']}&key=#{Rails.configuration.mysecrets['key']}&type=data&doctype=json&version=1.1&q=#{source}"
+    doc = JSON.parse(open(URI.escape("http://fanyi.youdao.com/openapi.do?keyfrom=#{Rails.configuration.mysecrets['keyfrom']}&key=#{Rails.configuration.mysecrets['key']}&type=data&doctype=json&version=1.1&q=#{source}")).read)
     if doc.fetch('basic',{}).fetch('explains',nil) != nil
-      target << "us: [#{doc['basic']['us-phonetic']}]  uk: [#{doc['basic']['uk-phonetic']}]"
+      if doc.fetch('basic',{}).fetch('us-phonetic',nil) != nil
+        target << "us: [#{doc['basic']['us-phonetic']}]  uk: [#{doc['basic']['uk-phonetic']}]"
+      end
+      if doc.fetch('basic',{}).fetch('phonetic',nil) != nil
+        target << "[#{doc['basic']['phonetic']}]"
+      end
       doc['basic']['explains'].each do |link|
         logger.debug "---> translate to #{link}"
         target << link
