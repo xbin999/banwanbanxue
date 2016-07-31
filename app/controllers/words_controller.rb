@@ -96,9 +96,10 @@ private
     if doc.fetch('basic',{}).fetch('explains',nil) != nil
       if doc.fetch('basic',{}).fetch('us-phonetic',nil) != nil
         target << "us: [#{doc['basic']['us-phonetic']}]  uk: [#{doc['basic']['uk-phonetic']}]"
-      end
-      if doc.fetch('basic',{}).fetch('phonetic',nil) != nil
-        target << "[#{doc['basic']['phonetic']}]"
+      else
+        if doc.fetch('basic',{}).fetch('phonetic',nil) != nil
+          target << "[#{doc['basic']['phonetic']}]"
+        end
       end
       doc['basic']['explains'].each do |link|
         logger.debug "---> translate to #{link}"
