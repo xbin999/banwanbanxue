@@ -19,9 +19,10 @@ Rails.application.routes.draw do
   get  '/tool',       to: 'uploads#index'
   post '/upload',     to: 'uploads#upload'
   get  '/feed',       to: 'feeds#index'
-  get  '/translate',  to: 'words#new'
-  post '/translate',  to: 'words#translate'
-  get  '/events',     to: 'words#index'
+  get  '/translate' => redirect('http://cika.banwanbanxue.com/translate')
+  #get  '/translate',  to: 'words#new'
+  #post '/translate',  to: 'words#translate'
+  #get  '/events',     to: 'words#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
